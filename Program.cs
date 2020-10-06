@@ -73,13 +73,34 @@ namespace LeerData
                 }
             } */
 
-            using(var db = new AppVentaCursosContext()){
+            /* using(var db = new AppVentaCursosContext()){
                 var instructor = db.Instructor.Single(p => p.InstructorId == 7);
                 if(instructor != null){
                     db.Remove(instructor);
                     var estadoTransaccion = db.SaveChanges();
                     Console.WriteLine("El estado de la transaccion es: " + estadoTransaccion);
                 }
+            } */
+
+            /* using(var db = new AppVentaCursosContext()){
+                Console.WriteLine("Inicia la migracion a MySql.");
+                db.Database.SetCommandTimeout(400);
+                db.Database.Migrate();
+            } */
+
+            using(var db = new AppVentaCursosContext()){
+                var cursoAlgebra = new Curso{
+                    Titulo = "Algebra Lineal",
+                    Descripcion = "Curso avanzado de algebra"
+                };
+                db.Add(cursoAlgebra);
+                var cursoAlgoritmo= new Curso{
+                    Titulo = "Algoritmos evolutivos",
+                    Descripcion = "Curso avanzado de algoritmos"
+                };
+                db.Add(cursoAlgoritmo);
+                var estadoTransaccion = db.SaveChanges();
+                Console.WriteLine(estadoTransaccion);
             }
 
         }

@@ -1,14 +1,20 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using MySQL.Data.EntityFrameworkCore;
 
 namespace LeerData
 {
     public class AppVentaCursosContext : DbContext
     {
-        private const string connectionString = @"Data Source=DESKTOP-G3IBS3P\SQLEXPRESS;Initial Catalog=CursosOnline;Integrated Security=True"; 
+        public AppVentaCursosContext(){
+            Database.SetCommandTimeout(150000);
+        }
+        //private const string connectionString = @"Data Source=DESKTOP-G3IBS3P\SQLEXPRESS;Initial Catalog=CursosOnline;Integrated Security=True"; 
+        private const string connectionStringMysql = @"server=db4free.net;port=3306;database=emeltec001db;user=emelgarejo;password=emeltec001;old guids=true;default command timeout=800";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
-            optionsBuilder.UseSqlServer(connectionString);
+            //optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseMySQL(connectionStringMysql);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
